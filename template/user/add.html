@@ -1,0 +1,26 @@
+<%include file="../include/header.html" />
+        <%def name="S(x)">${x if x else ''}</%def>
+        <section class="page-content">
+            <div class="container">
+                <div class="content-wrap">
+                    <div class="content">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a>创建用户</a></li>
+                            <li><a href="javascript: history.back()">返回</a></li>
+                        </ul>
+                        <form action="user" method="post">
+                            <fieldset>
+                                <label for="username"><font color="#FF0000">*</font>用户名</label>
+                                <input type="text" id="username" name="username" required="required" maxlength="16" />
+                                <label for="password">密码</label>
+                                <input type="password" id="password" name="password" maxlength="16" />
+                                <label for="name"><font color="#FF0000">*</font>姓名</label>
+                                <input type="text" id="name" name="name" required="required" maxlength="32" />
+                            </fieldset>
+                            <button class="btn btn-primary">提交</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+<%include file="../include/footer.html" />

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="${config.encoding}" />
+        <title>${config.site_name} - 出错啦</title>
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        <base href="/" />
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <link rel="stylesheet" href="css/base.css" />
+    </head>
+    <body class="bg-body">
+        <section class="page-content">
+            <div class="container">
+                <div class="content-wrap">
+                    <div class="content">
+                        <div class="page-header">
+                            <h1 class="font-yahei">出错啦!</h1>
+                        </div>
+                        <div class="alert alert-error">
+                            <strong>${status}</strong> ${message}
+                        </div>
+                        <button class="btn btn-primary btn-large font-yahei" onclick="history.back()">返回</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

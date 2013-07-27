@@ -1,0 +1,49 @@
+<%include file="../include/header.html" />
+        <%def name="S(x)">${x if x else ''}</%def>
+        <section class="page-content">
+            <div class="container">
+                <div class="content-wrap">
+                    <div class="content">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a>用户列表</a></li>
+                            <li><a href="user/add">创建</a></li>
+                            <li><a href="javascript: history.back()">返回</a></li>
+                        </ul>
+                        <form action="user" method="GET" class="input-append">
+                            <input type="text" name="keyword" value="${S(keyword)}" placeholder="用户名或姓名" />
+                            <button type="submit" class="btn" title="查询"><i class="icon-search"></i></button>
+                        </form>
+                        <table class="table table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th width="192">用户名</th>
+                                    <th>姓名</th>
+                                    <th width="256">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                % for item in pagination.records:
+                                <tr>
+                                    <td><a href="user/${item.id}" title="${item.username}">${item.username}</a></td>
+                                    <td>${item.name}</td>
+                                    <td>
+                                        <a href="user/${item.id}/edit">修改</a>
+                                        <a href="user/${item.id}/password/edit">修改密码</a>
+                                        % if item.username != 'admin':
+                                        <a href="user/${item.id}/groups/edit">设置组</a>
+                                        <a href="user/${item.id}/roles/edit">设置角色</a>
+                                        <a href="user/${item.id}?_method=delete" onclick="return confirm('确定要删除吗?')">删除</a>
+                                        % endif
+                                    </td>
+                                </tr>
+                                % endfor
+                            </tbody>
+                        </table>
+                        <% action = 'user?keyword=' + (keyword if keyword else '') %>
+                        <%namespace name="paginate" file="../include/pagination.html" />
+                        ${paginate.show(action, pagination)}
+                    </div>
+                </div>
+            </div>
+        </section>
+<%include file="../include/footer.html" />

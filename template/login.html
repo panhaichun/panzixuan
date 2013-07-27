@@ -1,0 +1,31 @@
+<html lang="zh-CN">
+    <head>
+        <meta charset="${config.encoding}" />
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${config.site_name} - 登录</title>
+        <base href="/" />
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <link rel="stylesheet" href="css/base.css" />
+    </head>
+    <body class="bg-body">
+        <div class="container">
+            <form action="check" method="post" class="login-form">
+                % if message:
+                <div class="error-box"><div class="alert alert-error">${message}</div></div>
+                % endif
+                <filedset>
+                    <input type="hidden" name="referer" value="login" />
+                    <input type="hidden" name="redirect" value="${redirect}" />
+                    <legend><h1 class="font-yahei">登录</h1></legend>
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" class="input-block-level" required="required" maxlength="16" />
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" class="input-block-level" maxlength="16" />
+                </filedset>
+                <button type="submit" class="btn btn-primary btn-large font-yahei">登录</button>
+                <a class="btn btn-link" href="javascript:history.back();">取消</a>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="${config.encoding}" />
+        % if subtitle:
+        <title>${config.site_name} - ${subtitle}</title>
+        % else:
+        <title>${config.site_name}</title>
+        % endif
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        % if metas:
+        % for meta in metas:
+        <meta name="${meta.name}" content="${meta.content}">
+        % endfor
+        % endif
+        <base href="/" />
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <link rel="stylesheet" href="css/base.css" />
+        % if styles:
+        % for style in styles:
+        <link rel="stylesheet" href="${style}" />
+        % endfor
+        % endif
+    </head>
+    <body class="bg-body">
+        <header class="navbar-fixed-top">
+            <div class="container">
+                <div class="row">
+                    <div class="span5"><h1 class="font-yahei header-title">梓萱，Happy Everyday</h1></div>
+                    <div class="span7 nav-btn">
+                        <ul class="inline pull-left">
+                            <li><a href="blog" class="active btn btn-large btn-success font-yahei">成长日志</a></li>
+                            <li><a href="album" class="btn btn-large btn-info font-yahei">生活剪影</a></li>
+                        </ul>
+                        <form class="input-append pull-right search" method="get">
+                            <input type="text" placeholder="我想找..." />
+                            <button title="查询" class="btn btn-info" type="submit"><i class="icon-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="control-box affix" style="right: 40px;">
+            % if principal:
+            <div class="btn-group">
+                <button class="btn btn-large btn-info dropdown-toggle font-yahei" data-toggle="dropdown"><i class="icon-user"></i> <span style="display: inline-block; max-width: 60px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${principal.get_prototype().name}">${principal.get_prototype().name}</span> <span class="caret"></span></button>
+                <ul class="dropdown-menu" style="z-index: 999999">
+                    <li><a href="profile">个人信息</a></li>
+                    <li><a href="profile/edit">修改信息</a></li>
+                    <li><a href="profile/password/edit">修改密码</a></li>
+                    <li class="divider"></li>
+                    <li><a href="logout?redirect=${login_redirect}">退出</a></li>
+                </ul>
+            </div>
+            % if principal.get_prototype().contains_role('MANAGEMENT'):
+            <div class="btn-group">
+                <button class="btn btn-large btn-danger dropdown-toggle font-yahei" data-toggle="dropdown"><i class="icon-edit"></i> 发布 <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="blog/add">日志</a></li>
+                    <li class="divider"></li>
+                    <li><a href="album/add">照片</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-large btn-success dropdown-toggle font-yahei" data-toggle="dropdown"><i class="icon-wrench"></i> 管理 <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="group">组</a></li>
+                    <li class="divider"></li>
+                    <li><a href="user">用户</a></li>
+                </ul>
+            </div>
+            % endif
+            % endif
+        </div>

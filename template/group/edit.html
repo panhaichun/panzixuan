@@ -1,0 +1,24 @@
+<%include file="../include/header.html" />
+        <section class="page-content">
+            <div class="container">
+                <div class="content-wrap">
+                    <div class="content">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a>修改组</a></li>
+                            <li><a href="javascript: history.back()">返回</a></li>
+                        </ul>
+                        <form action="group/${model.id}" method="post">
+                            <input type="hidden" name="_method" value="put" />
+                            <fieldset>
+                                <label for="name"><font color="#FF0000">*</font>名称</label>
+                                <input type="text" id="name" name="name" value="${model.name}" ${'''readonly="readonly"''' if model.name in ['用户', '管理员'] else ''} required="required" maxlength="32" />
+                                <label for="description">描述</label>
+                                <textarea id="description" name="description" rows="3" maxlength="128">${model.description}</textarea>
+                            </fieldset>
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+<%include file="../include/footer.html" />

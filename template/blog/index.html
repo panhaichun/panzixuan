@@ -1,0 +1,65 @@
+<%include file="../include/header.html" />
+        <section class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="span9">
+                        <div class="content-wrap">
+                            % if articles:
+                            % for article in articles:
+                            <article class="content">
+                                <header><h3 class="font-yahei"><a href="blog/${article.id}">${article.title}</a></h3></header>
+                                <p>${article.content}</p>
+                                <footer>
+                                    <ul class="inline">
+                                        <time pubdate="pubdate">${article.publishTime}</time>
+                                        <li><em>${article.authorName}</em></li>
+                                        <li><a href="">${article.keywords}</a></li>
+                                        <li><a href="">评论(${article.commentsTimes})</a></li>
+                                        <li><a href="">阅读(${article.readTimes})</a></li>
+                                    </ul>
+                                </footer>
+                            </article>
+                            % endfor
+                            % endif
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <aside class="content-wrap">
+                            <div class="content">
+                                <h3 class="font-yahei">标签</h3>
+                                <p>
+                                    % if labels:
+                                    % for label in labels:
+                                    <a href="#">${label.name}</a>
+                                    % endfor
+                                    % endif
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="content">
+                            <h3 class="font-yahei">分类</h3>
+                            <ul class="unstyled">
+                                % if categories:
+                                % for category in categories:
+                                <li><a href="#">${category.name}</a></li>
+                                % endfor
+                                % endif
+                            </ul>
+                            </div>
+                            <hr>
+                            <div class="content">
+                            <h3 class="font-yahei">归档</h3>
+                            <ul class="unstyled">
+                                % if archives:
+                                % for archive in archives:
+                                <li><a href="#">${archive.month}</a></li>
+                                % endfor
+                                % endif
+                            </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+<%include file="../include/footer.html" />

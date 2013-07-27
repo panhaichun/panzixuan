@@ -1,0 +1,26 @@
+<%include file="../include/header.html" />
+        <section class="page-content">
+            <div class="container">
+                <div class="content-wrap">
+                    <div class="content">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a>查看组</a></li>
+                            <li><a href="javascript: history.back()">返回</a></li>
+                        </ul>
+                        <dl>
+                            <dt>名称</dt>
+                            <dd>${model.name}</dd>
+                            <dt>描述</dt>
+                            <dd>${model.description}</dd>
+                            <dt>包含角色</dt>
+                            <dd>
+                                % for r in model.get_contain_roles():
+                                ${r.name} [${r.description}]<br />
+                                % endfor 
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+<%include file="../include/footer.html" />
