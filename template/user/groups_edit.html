@@ -1,0 +1,51 @@
+<%include file="../include/header.html" />
+        <section class="page-content">
+            <div class="container">
+                <div class="content-wrap">
+                    <div class="content">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a>设置用户组</a></li>
+                            <li><a href="javascript: history.back()">返回</a></li>
+                        </ul>
+                        <form action="user/${model.id}/groups" method="post">
+                            <input type="hidden" name="_method" value="put" />
+                            <fieldset>
+                                <legend><h4 class="font-yahei">${model.name}</h4></legend>
+                                <div style="float: left; text-align: center;">
+                                    <p>可选组</p>
+                                    <select id="unselected" multiple="multiple" style="height: 192px;">
+                                    % for group in groups:
+                                    % if group not in model.groups:
+                                    <option value="${group.id}" title="${group.description}">${group.name}</option>
+                                    % endif
+                                    % endfor
+                                    </select>
+                                </div>
+                                <div style="float: left; text-align: center;">
+                                    <button type="button" style="display: block; margin: 92px 4px 4px 4px;" class="btn" title="选择" onclick="$('#unselected option:selected').appendTo('#selected');"><i class="icon-chevron-right"></i></button>
+                                    <button type="button" class="btn" title="取消选择" onclick="$('#selected option:selected').appendTo('#unselected');"><i class="icon-chevron-left"></i></button>
+                                </div>
+                                <div style="float: left; text-align: center;">
+                                    <p>已选组</p>
+                                    <select id="selected" name="group_id" multiple="multiple" style="height: 192px;">
+                                    % for item in model.groups:
+                                    <option value="${item.id}" title="${item.description}">${item.name}</option>
+                                    % endfor
+                                    </select>
+                                </div>
+                            </fieldset>
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+<%include file="../include/footer.html" />
+
+<script language="javascript">
+	
+	$("form").submit(function() {
+		$("#selected option").attr("selected", "selected");
+	});
+	
+</script>
