@@ -49,7 +49,7 @@ class User:
         return hash(self.id) if self.id else hash(self)
         
     def __str__(self):
-        return "User [username=%s, name=%s]" % (self.username, self.name)
+        return 'User [username=%s, name=%s]' % (self.username, self.name)
         
 class Group:
 
@@ -85,7 +85,7 @@ class Group:
         return hash(self.id) if self.id else hash(self)
         
     def __str__(self):
-        return "Group [name=%s]" % self.name
+        return 'Group [name=%s]' % self.name
         
 class Role:
     
@@ -103,7 +103,7 @@ class Role:
         return hash(self.id) if self.id else hash(self)
         
     def __str__(self):
-        return "Role [name=%s]" % self.name
+        return 'Role [name=%s]' % self.name
         
 class UserNotFoundException(Exception):
     pass

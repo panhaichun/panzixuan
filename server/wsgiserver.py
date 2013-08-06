@@ -78,7 +78,7 @@ def parse_request_line(line):
         if version[:5] != 'HTTP/':
             logging.warn('不能识别协议[%s]' % version)
             raise Exception
-        version_number = version.split('/', 1)[1].split(".")
+        version_number = version.split('/', 1)[1].split('.')
         if len(version_number) != 2:
             logging.warn('不能识别Http协议版本[%s]' % version)
             raise Exception

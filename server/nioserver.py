@@ -152,7 +152,7 @@ class NIOServer:
             traceback.print_exc()
             sys.exit(1)
 
-        os.chdir("/")
+        os.chdir('/')
         os.umask(0x22) # 文件权限755
         # 重定向标准输入输出和错误
         # os.dup2(open('/dev/null', 'r').fileno(), sys.stdin.fileno())

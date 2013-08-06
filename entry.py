@@ -88,7 +88,7 @@ class Request:
         self.__params = {}
         self.__parse_params(self.get_query_string().strip())
         if self.get_content_length() > 0:
-            if not self.get_content_type().startswith("multipart/form-data"):
+            if not self.get_content_type().startswith('multipart/form-data'):
                 self.__parse_params(str(self.__input.getvalue(), self.__encoding).strip())
             else:
                 # 比较难搞，以后实现

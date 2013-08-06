@@ -40,7 +40,7 @@ def handle(e, request, response):
             url = referer + '?message=' + urllib.parse.quote(str(e), encoding=request.get_encoding())
             redirect = request.get_param(redirect_key)
             if redirect:
-                url += "&redirect=" + urllib.parse.quote(redirect, encoding=request.get_encoding())
+                url += '&redirect=' + urllib.parse.quote(redirect, encoding=request.get_encoding())
             response.redirect(url)
         else:
             response.set_status(401)
