@@ -1,4 +1,4 @@
-import ctrl.home, ctrl.login, ctrl.blog, ctrl.profile, ctrl.user, ctrl.group, ctrl.attachment
+import ctrl.home, ctrl.login, ctrl.blog, ctrl.profile, ctrl.user, ctrl.group
 import exceptionfilter, authenticationfilter
 
 DISP_METHOD = 'dispatch'
@@ -16,8 +16,6 @@ def get_handler(path):
         return ctrl.user
     if path.startswith('/group'):
         return ctrl.group
-    if path.startswith('/attachment'):
-        return ctrl.attachment
     return None
 
 @exceptionfilter.exception()

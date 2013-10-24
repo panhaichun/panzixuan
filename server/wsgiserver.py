@@ -13,24 +13,17 @@ SERVER_PROTOCOL_VERSION = 'HTTP/1.1'
 SERVER_VERSION_NUMBER = (1, 1) # 不支持低版本的http协议
 
 DEFAULT_PORT = 8000
-DEFAULT_ENCODING = 'UTF-8'
 
 class HTTPServer:
 
-    def __init__(self, port=DEFAULT_PORT, encoding=DEFAULT_ENCODING, application=None):
+    def __init__(self, port=DEFAULT_PORT, application=None):
         self.set_port(port)
-        self.set_encoding(encoding)
         self.set_application(application)
         
     def set_port(self, port):
         if port is None or port < 1:
             raise ValueError('参数[port]不能小于1')
         self.port = port
-
-    def set_encoding(self, encoding):
-        if encoding is None:
-            raise ValueError('参数[encoding]不能为空')
-        self.encoding = encoding
         
     def set_application(self, application):
         if application is None:
@@ -44,9 +37,9 @@ class HTTPServer:
         env['SERVER_PORT'] = self.port
         s = server.NIOServer(address=('', self.port), 
                         sockopts=((socket.SOL_SOCKET, socket.SO_REUSEADDR, 1),), 
-                        decode = lambda session, bytes: parse_request(session, bytes, self.encoding), 
+                        decode = lambda session, bytes: parse_request(session, bytes), 
                         exec_nr_threads=8, 
-                        handler=HttpHandler(self.application, self.encoding, env))
+                        handler=HttpHandler(self.application, env))
         s.daemonize()
         s.start()
 
@@ -104,7 +97,7 @@ def parse_request_header(line):
         logging.warn('不能识别请求头[%s]' % line)
         raise Exception
     
-def parse_request(session, bytes, encoding):
+def parse_request(session, bytes):
     if not bytes:
         return None
     if not session.attributes.get('decode_ctx'):
@@ -140,18 +133,18 @@ def parse_request(session, bytes, encoding):
             ctx.match_crlf = True
             if not ctx.request:
                 try:
-                    ctx.request = parse_request_line(str(ctx.line, encoding))
+                    ctx.request = parse_request_line(ctx.line.decode())
                 except Exception:
-                    session.write(('%s 400 Bad Request\r\nConnection: close\r\n\r\n' % SERVER_PROTOCOL_VERSION).encode(encoding))
+                    session.write(('%s 400 Bad Request\r\nConnection: close\r\n\r\n' % SERVER_PROTOCOL_VERSION).encode())
                     del session.attributes['decode_ctx']
                     session.close()
                     return None
             else:
                 try:
-                    name, value = parse_request_header(str(ctx.line, encoding))
+                    name, value = parse_request_header(ctx.line.decode())
                     ctx.request.headers[name.upper()] = value
                 except Exception:
-                    session.write(('%s 400 Bad Request\r\nConnection: close\r\n\r\n' % SERVER_PROTOCOL_VERSION).encode(encoding))
+                    session.write(('%s 400 Bad Request\r\nConnection: close\r\n\r\n' % SERVER_PROTOCOL_VERSION).encode())
                     del session.attributes['decode_ctx']
                     session.close()
                     return None
@@ -161,7 +154,7 @@ def parse_request(session, bytes, encoding):
             ctx.match_crlf = False
             # 支持 Expect: 100-Continue
             if ctx.request.headers.get('EXPECT', '').lower() == '100-Continue'.lower():
-                session.write(('%s 100 Continue\r\n\r\n' % SERVER_PROTOCOL_VERSION).encode(encoding))
+                session.write(('%s 100 Continue\r\n\r\n' % SERVER_PROTOCOL_VERSION).encode())
             # 解释Http头，如果有Content-Length，则继续接收数据，否则
             ctlen = int(ctx.request.headers.get('CONTENT-LENGTH', '0'))
             if ctlen:
@@ -180,9 +173,8 @@ def parse_request(session, bytes, encoding):
         
 class HttpHandler:
 
-    def __init__(self, application, encoding, environ):
+    def __init__(self, application, environ):
         self.application = application
-        self.encoding = encoding
         self.base_env = environ
     
     def __process_data(self, session, data):
@@ -206,7 +198,7 @@ class HttpHandler:
         close_conn = data.headers.get('CONNECTION')
         close_conn = True if close_conn is not None and close_conn.lower() == 'close' else False
         out = io.BytesIO()
-        write = lambda obj: out.write(obj) if isinstance(obj, bytes) or isinstance(obj, bytearray) else out.write(str(obj).encode(self.encoding))
+        write = lambda obj: out.write(obj) if isinstance(obj, bytes) or isinstance(obj, bytearray) else out.write(str(obj).encode())
         outputs = []
         status = [200, 'OK']
         headers = {}
@@ -228,27 +220,27 @@ class HttpHandler:
         except Exception as e:
             logging.warn(e)
             traceback.print_exc()
-            outputs.append(('%s 500 Internal Server Error\r\nConnection: close\r\n\r\n' % SERVER_PROTOCOL_VERSION).encode(self.encoding))
+            outputs.append(('%s 500 Internal Server Error\r\nConnection: close\r\n\r\n' % SERVER_PROTOCOL_VERSION).encode())
         else:
-            outputs.append(('%s %d %s\r\n' % (SERVER_PROTOCOL_VERSION, status[0], status[1])).encode(self.encoding))
+            outputs.append(('%s %d %s\r\n' % (SERVER_PROTOCOL_VERSION, status[0], status[1])).encode())
             for header in headers.items():
                 if header[0] == 'Connection' and header[1].lower() == 'close':
                     close_conn = True
                     continue
-                outputs.append(('%s: %s\r\n' % header).encode(self.encoding))
+                outputs.append(('%s: %s\r\n' % header).encode())
             if status[0] >= 300:
                 close_conn = True
             if close_conn:
-                outputs.append('Connection: close\r\n'.encode(self.encoding))
+                outputs.append('Connection: close\r\n'.encode())
             content = out.getvalue()
             if content:
                 content_len = len(content)
                 if content_len:
                     if not 'Content-Length' in headers:
-                        outputs.append(('Content-Length: %d\r\n\r\n' % content_len).encode(self.encoding))
+                        outputs.append(('Content-Length: %d\r\n\r\n' % content_len).encode())
                     outputs.append(content)
             else:
-                outputs.append('\r\n'.encode(self.encoding))
+                outputs.append('\r\n'.encode())
         finally:
             for output in outputs:
                 if output:

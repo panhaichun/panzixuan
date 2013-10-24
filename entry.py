@@ -89,7 +89,7 @@ class Request:
         self.__parse_params(self.get_query_string().strip())
         if self.get_content_length() > 0:
             if not self.get_content_type().startswith('multipart/form-data'):
-                self.__parse_params(str(self.__input.getvalue(), self.__encoding).strip())
+                self.__parse_params(self.__input.getvalue().decode(self.__encoding).strip())
             else:
                 # 比较难搞，以后实现
                 pass
@@ -218,7 +218,7 @@ class Response:
     def get_cookies(self):
         return self.__cookies[:]
 
-def service(env, start_response):
+def application(env, start_response):
     request = Request(env, config.encoding)
     out = io.BytesIO()
     response = Response(out, config.encoding)
@@ -262,4 +262,4 @@ if __name__ == '__main__':
                 datefmt='%Y-%m-%d %H:%M:%S',
                 file=config.log_file,
                 filemode='w')
-    HTTPServer(config.port, config.encoding, service).start()
+    HTTPServer(config.port, application).start()

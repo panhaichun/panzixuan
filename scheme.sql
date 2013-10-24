@@ -45,10 +45,10 @@ create table T_USER_GROUP (USER_ID integer, GROUP_ID integer, primary key(USER_I
 create table T_USER_ROLE (USER_ID integer, ROLE_ID integer, primary key (USER_ID, ROLE_ID));
 create table T_GROUP_ROLE (GROUP_ID integer, ROLE_ID integer, primary key (GROUP_ID, ROLE_ID));
 
-INSERT INTO T_ROLE (NAME, DESCRIPTION) VALUES ('USER', '用户');
-INSERT INTO T_ROLE (NAME, DESCRIPTION) VALUES ('MANAGEMENT', '系统管理');
-INSERT INTO T_GROUP (NAME, DESCRIPTION) VALUES ('用户', '用户组');
-INSERT INTO T_GROUP (NAME, PARENT_ID, DESCRIPTION) VALUES ('管理员', 1, '管理员组');
-INSERT INTO T_GROUP_ROLE (GROUP_ID, ROLE_ID) SELECT 2 AS GROUP_ID, ID AS ROLE_ID FROM T_ROLE;
-INSERT INTO T_USER (USERNAME, PASSWORD, NAME) VALUES ('admin', '', '管理员');
-INSERT INTO T_USER_GROUP (USER_ID, GROUP_ID) VALUES (1, 2);
+insert into T_ROLE (NAME, DESCRIPTION) values ('USER', '用户');
+insert into T_ROLE (NAME, DESCRIPTION) values ('MANAGEMENT', '系统管理');
+insert into T_GROUP (NAME, DESCRIPTION) values ('用户', '用户组');
+insert into T_GROUP (NAME, PARENT_ID, DESCRIPTION) values ('管理员', 1, '管理员组');
+insert into T_GROUP_ROLE (GROUP_ID, ROLE_ID) select 2 as GROUP_ID, ID as ROLE_ID from T_ROLE;
+insert into T_USER (USERNAME, PASSWORD, NAME) values ('admin', '', '管理员');
+insert into T_USER_GROUP (USER_ID, GROUP_ID) values (1, 2);

@@ -33,17 +33,10 @@ def handle(e, request, response):
     
     # 认证异常
     if isinstance(e, AuthenticationException):
-        referer = request.get_param(referer_key)
-        if not referer:
-            referer = request.get_header(referer_key)
-        if referer:
-            url = referer + '?message=' + urllib.parse.quote(str(e), encoding=request.get_encoding())
-            redirect = request.get_param(redirect_key)
-            if redirect:
-                url += '&redirect=' + urllib.parse.quote(redirect, encoding=request.get_encoding())
-            response.redirect(url)
-        else:
-            response.set_status(401)
+        url = request.get_ctx_path() + '/login?message=' + urllib.parse.quote(str(e), encoding=request.get_encoding())
+        redirect = request.get_param(redirect_key)
+        url = url + '&redirect=' + urllib.parse.quote(redirect, encoding=request.get_encoding()) if redirect else url
+        response.redirect(url)
         return
     
     # 未登录访问了受保护的页面，重定向到登录页面
