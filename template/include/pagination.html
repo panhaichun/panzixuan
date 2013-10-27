@@ -1,48 +1,46 @@
 <%def name="show(action, pagination)">
-<div class="pagination pagination-right">
-	<ul>
-		<li class="disabled"><span>共${pagination.total}条, ${pagination.size}条/页</span></li>
-		% if pagination.number == 1:
-		<li class="active"><span>1</span></li>
-		% else:
-		<li><a href="${action}&page=1">1</a></li>
-        % endif
-        <% _begin = 1 %>
-		<% _end = 1 %>
-		% if pagination.total_pages > 2:
-		<% _begin = 2 %>
-		<% _end = pagination.total_pages - 1 %>
-		% if pagination.total_pages > 11:
-		% if pagination.number <= 6:
-		<% _end = 10 %>
-		% elif pagination.number > pagination.total_pages - 6:
-		<% _begin = _end - 8 %>
-        % else:
-		<% _begin = pagination.number - 4 %>
-		<% _end = pagination.number + 4 %>
-		% endif
-		% endif
-		% if pagination.number > 6 and pagination.total_pages > 11:
-		<li><a title="第${_begin - 1}页" href="${action}&page=${_begin - 1}">&laquo;</a></li>
-		% endif
-        % for i in range(_begin, _end):
-		% if i == pagination.number:
-		<li class="active"><span>${i}</span></li>
-		% else:
-		<li><a href="${action}&page=${i}">${i}</a></li>
-		% endif
-		% endfor
-		% endif
-		% if pagination.total_pages > 11 and pagination.total_pages - pagination.number > 5:
-		<li><a title="第${_end + 1}页" href="${action}&page=${_end + 1}">&raquo;</a></li>
-		% endif
-		% if pagination.total_pages > 1:
-		% if pagination.number == pagination.total_pages:
-		<li class="active"><span>${pagination.total_pages}</span></li>
-		% else:
-		<li><a href="${action}&page=${pagination.total_pages}">${pagination.total_pages}</a></li>
-		% endif
-		% endif
-	</ul>
-</div>
+<ul class="pagination pull-right wrap">
+    <li class="disabled"><span>共${pagination.total}条, ${pagination.size}条/页</span></li>
+    % if pagination.number == 1:
+    <li class="active"><span>1</span></li>
+    % else:
+    <li><a href="${action}&page=1">1</a></li>
+    % endif
+    <% _begin = 1 %>
+    <% _end = 1 %>
+    % if pagination.total_pages > 2:
+    <% _begin = 2 %>
+    <% _end = pagination.total_pages - 1 %>
+    % if pagination.total_pages > 11:
+    % if pagination.number <= 6:
+    <% _end = 10 %>
+    % elif pagination.number > pagination.total_pages - 6:
+    <% _begin = _end - 8 %>
+    % else:
+    <% _begin = pagination.number - 4 %>
+    <% _end = pagination.number + 4 %>
+    % endif
+    % endif
+    % if pagination.number > 6 and pagination.total_pages > 11:
+    <li><a title="第${_begin - 1}页" href="${action}&page=${_begin - 1}">&laquo;</a></li>
+    % endif
+    % for i in range(_begin, _end):
+    % if i == pagination.number:
+    <li class="active"><span>${i}</span></li>
+    % else:
+    <li><a href="${action}&page=${i}">${i}</a></li>
+    % endif
+    % endfor
+    % endif
+    % if pagination.total_pages > 11 and pagination.total_pages - pagination.number > 5:
+    <li><a title="第${_end + 1}页" href="${action}&page=${_end + 1}">&raquo;</a></li>
+    % endif
+    % if pagination.total_pages > 1:
+    % if pagination.number == pagination.total_pages:
+    <li class="active"><span>${pagination.total_pages}</span></li>
+    % else:
+    <li><a href="${action}&page=${pagination.total_pages}">${pagination.total_pages}</a></li>
+    % endif
+    % endif
+</ul>
 </%def>

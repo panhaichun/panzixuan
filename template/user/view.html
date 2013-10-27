@@ -1,13 +1,37 @@
 <%include file="../include/header.html" />
-        <section class="page-content">
-            <div class="container">
-                <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
                     <div class="content">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a>查看用户</a></li>
-                            <li><a href="javascript: history.back()">返回</a></li>
+                        <div class="panel panel-menu">
+                            <div class="panel-heading"><h4><span class="glyphicon glyphicon-cog"></span> 系统管理</h4></div>
+                        </div>
+                        <div class="list-group wrap">
+                            <a href="javascript:" class="list-group-item active">
+                                <span class="glyphicon glyphicon-folder-open"></span> 用户 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                            <a href="group" class="list-group-item">
+                                <span class="glyphicon glyphicon-folder-close"></span> 组 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                            <a href="log" class="list-group-item">
+                                <span class="glyphicon glyphicon-folder-close"></span> 日志 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="content">
+                        <ul class="nav nav-pills wrap">
+                            <li class="active"><a href="javascript:"><span class="glyphicon glyphicon-expand"></span> 查看</a></li>
+                            <li><a href="user/${model.id}/edit"><span class="glyphicon glyphicon-edit"></span> 修改</a></li>
+                            <li><a href="user/${model.id}/password/edit"><span class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
+                            <li><a href="user/${model.id}/groups/edit"><span class="glyphicon glyphicon-wrench"></span> 设置组</a></li>
+                            <li><a href="user/${model.id}/roles/edit"><span class="glyphicon glyphicon-wrench"></span> 设置角色</a></li>
+                            <li><a href="user"><span class="glyphicon glyphicon-list"></span> 列表</a></li>
+                            <li><a href="user/add"><span class="glyphicon glyphicon-plus"></span> 创建</a></li>
+                            <li class="pull-right"><a href="javascript: history.back();"><span class="glyphicon glyphicon-hand-left"></span> 返回</a></li>
                         </ul>
-                        <dl>
+                        <dl class="dl-horizontal wrap">
                             <dt>用户名</dt>
                             <dd>${model.username}</dd>
                             <dt>姓名</dt>
@@ -28,5 +52,5 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 <%include file="../include/footer.html" />

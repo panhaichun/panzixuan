@@ -1,6 +1,6 @@
 class Pagination:
 
-    DEFAULT_PAGE_SIZE = 20
+    DEFAULT_PAGE_SIZE = 10
     
     def __init__(self, number, size, total, records):
         if number is None or number < 1:

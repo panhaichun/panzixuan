@@ -1,51 +1,48 @@
 <%include file="../include/header.html" />
-        <section class="page-content">
-            <div class="container">
-                <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
                     <div class="content">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a>设置用户角色</a></li>
-                            <li><a href="javascript: history.back()">返回</a></li>
+                        <div class="panel panel-menu">
+                            <div class="panel-heading"><h4><span class="glyphicon glyphicon-cog"></span> 系统管理</h4></div>
+                        </div>
+                        <div class="list-group wrap">
+                            <a href="javascript:" class="list-group-item active">
+                                <span class="glyphicon glyphicon-folder-open"></span> 用户 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                            <a href="group" class="list-group-item">
+                                <span class="glyphicon glyphicon-folder-close"></span> 组 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                            <a href="log" class="list-group-item">
+                                <span class="glyphicon glyphicon-folder-close"></span> 日志 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="content">
+                        <ul class="nav nav-pills wrap">
+                            <li class="active"><a href="javascript:"><span class="glyphicon glyphicon-wrench"></span> 设置角色</a></li>
+                            <li><a href="user/${model.id}"><span class="glyphicon glyphicon-expand"></span> 查看</a></li>
+                            <li><a href="user/${model.id}/edit"><span class="glyphicon glyphicon-edit"></span> 修改</a></li>
+                            <li><a href="user/${model.id}/password/edit"><span class="glyphicon glyphicon-wrench"></span> 修改密码</a></li>
+                            <li><a href="user/${model.id}/groups/edit"><span class="glyphicon glyphicon-wrench"></span> 设置组</a></li>
+                            <li><a href="user"><span class="glyphicon glyphicon-list"></span> 列表</a></li>
+                            <li><a href="user/add"><span class="glyphicon glyphicon-plus"></span> 创建</a></li>
+                            <li class="pull-right"><a href="javascript: history.back();"><span class="glyphicon glyphicon-hand-left"></span> 返回</a></li>
                         </ul>
-                        <form action="user/${model.id}/roles" method="post">
-                            <input type="hidden" name="_method" value="put" />
-                            <fieldset>
-                                <legend><h4 class="font-yahei">${model.name}</h4></legend>
-                                <div style="float: left; text-align: center;">
-                                    <p>可选角色</p>
-                                    <select id="unselected" multiple="multiple" style="height: 192px;">
-                                    % for role in roles:
-                                    % if role not in model.roles:
-                                    <option value="${role.id}" title="${role.description}">${role.name}</option>
-                                    % endif
-                                    % endfor
-                                    </select>
-                                </div>
-                                <div style="float: left; text-align: center;">
-                                    <button type="button" style="display: block; margin: 92px 4px 4px 4px;" class="btn" title="选择" onclick="$('#unselected option:selected').appendTo('#selected');"><i class="icon-chevron-right"></i></button>
-                                    <button type="button" class="btn" title="取消选择" onclick="$('#selected option:selected').appendTo('#unselected');"><i class="icon-chevron-left"></i></button>
-                                </div>
-                                <div style="float: left; text-align: center;">
-                                    <p>已选角色</p>
-                                    <select id="selected" name="role_id" multiple="multiple" style="height: 192px;">
-                                    % for item in model.roles:
-                                    <option value="${item.id}" title="${item.description}">${item.name}</option>
-                                    % endfor
-                                    </select>
-                                </div>
-                            </fieldset>
-                            <button type="submit" class="btn btn-primary">提交</button>
+                        <form action="user/${model.id}/roles" method="post" class="wrap">
+                            <input type="hidden" name="_method" value="put" /
+                            <legend><h4>${model.name}</h4></legend>
+                            % for role in roles:
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="role_id" value="${role.id}" ${'''checked="checked" ''' if role in model.roles else ''}/> ${role.name} [${role.description}]</label>
+                            </div>
+                            % endfor
+                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> 提交</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 <%include file="../include/footer.html" />
-
-<script language="javascript">
-	
-	$("form").submit(function() {
-		$("#selected option").attr("selected", "selected");
-	});
-	
-</script>

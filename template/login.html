@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh_CN">
     <head>
         <meta charset="${config.encoding}" />
         <meta http-equiv="Cache-Control" content="no-cache" />
@@ -9,23 +9,29 @@
         <link rel="stylesheet" href="css/bootstrap.css" />
         <link rel="stylesheet" href="css/base.css" />
     </head>
-    <body class="bg-body">
+    <body>
         <div class="container">
             <form action="check" method="post" class="login-form">
                 % if message:
-                <div class="error-box"><div class="alert alert-error">${message}</div></div>
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>错误</strong> ${message}
+                </div>
                 % endif
-                <filedset>
-                    <input type="hidden" name="redirect" value="${redirect}" />
-                    <legend><h1 class="font-yahei">登录</h1></legend>
-                    <label for="username"><font color="#FF0000">*</font>用户名</label>
-                    <input type="text" id="username" name="username" class="input-block-level" required="required" maxlength="16" />
+                <legend><h1><span class="glyphicon glyphicon-user"></span> 登录</h1></legend>
+                <input type="hidden" name="redirect" value="${redirect}" />
+                <div class="form-group">
+                    <label for="username"><font color="#ff0000">*</font>用户名</label>
+                    <input type="text" id="username" name="username" class="form-control" required="required" maxlength="16" />
+                </div>
+                <div class="form-group">
                     <label for="password">密码</label>
-                    <input type="password" id="password" name="password" class="input-block-level" maxlength="16" />
-                </filedset>
-                <button type="submit" class="btn btn-primary btn-large font-yahei">登录</button>
-                <a class="btn btn-link" href="javascript:history.back();">取消</a>
+                    <input type="password" id="password" name="password" class="form-control" maxlength="16" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> 登录</button>
             </form>
         </div>
     </body>
 </html>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>

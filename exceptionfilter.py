@@ -34,20 +34,14 @@ def handle(e, request, response):
     # 认证异常
     if isinstance(e, AuthenticationException):
         url = request.get_ctx_path() + '/login?message=' + urllib.parse.quote(str(e), encoding=request.get_encoding())
-        redirect = request.get_param(redirect_key)
-        url = url + '&redirect=' + urllib.parse.quote(redirect, encoding=request.get_encoding()) if redirect else url
+        url = url + '&redirect=' + request.get_param(redirect_key, '')
         response.redirect(url)
         return
     
     # 未登录访问了受保护的页面，重定向到登录页面
     if isinstance(e, UnAuthenticationException):
-        login_redirect = ''
-        if 'get' == request.get_method().lower():
-            login_redirect = request.get_path()
-        else:
-            login_redirect = request.get_header(referer_key)
-        login_redirect = urllib.parse.quote(login_redirect, encoding=request.get_encoding()) if login_redirect else ''
-        response.redirect(request.get_ctx_path() + '/login?redirect=' + login_redirect)
+        login_redirect = request.get_path() if 'get' == request.get_method().lower() else request.get_header(referer_key)
+        response.redirect(request.get_ctx_path() + '/login?redirect=' + (login_redirect if login_redirect else ''))
         return
     
     status = 500

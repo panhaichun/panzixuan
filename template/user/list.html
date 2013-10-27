@@ -1,49 +1,74 @@
 <%include file="../include/header.html" />
         <%def name="S(x)">${x if x else ''}</%def>
-        <section class="page-content">
-            <div class="container">
-                <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
                     <div class="content">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a>用户列表</a></li>
-                            <li><a href="user/add">创建</a></li>
-                            <li><a href="javascript: history.back()">返回</a></li>
+                        <div class="panel panel-menu">
+                            <div class="panel-heading"><h4><span class="glyphicon glyphicon-cog"></span> 系统管理</h4></div>
+                        </div>
+                        <div class="list-group wrap">
+                            <a href="javascript:" class="list-group-item active">
+                                <span class="glyphicon glyphicon-folder-open"></span> 用户 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                            <a href="group" class="list-group-item">
+                                <span class="glyphicon glyphicon-folder-close"></span> 组 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                            <a href="log" class="list-group-item">
+                                <span class="glyphicon glyphicon-folder-close"></span> 日志 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="content">
+                        <ul class="nav nav-pills wrap">
+                            <li class="active"><a href="javascript:"><span class="glyphicon glyphicon-list"></span> 列表</a></li>
+                            <li><a href="user/add"><span class="glyphicon glyphicon-plus"></span> 创建</a></li>
+                            <li class="pull-right"><a href="javascript: history.back();"><span class="glyphicon glyphicon-hand-left"></span> 返回</a></li>
                         </ul>
-                        <form action="user" method="GET" class="input-append">
-                            <input type="text" name="keyword" value="${S(keyword)}" placeholder="用户名或姓名" />
-                            <button type="submit" class="btn" title="查询"><i class="icon-search"></i></button>
+                        <form action="user" method="get" class="form-search wrap">
+                            <div class="input-group">
+                                <input type="text" name="keyword" value="${S(keyword)}" class="form-control" placeholder="用户名或姓名" />
+                                <span class="input-group-addon btn btn-primary" onclick="$(this).parents('form').submit();" title="查询">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                            </div>
                         </form>
-                        <table class="table table-hover table-condensed">
-                            <thead>
-                                <tr>
-                                    <th width="192">用户名</th>
-                                    <th>姓名</th>
-                                    <th width="256">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                % for item in pagination.records:
-                                <tr>
-                                    <td><a href="user/${item.id}" title="${item.username}">${item.username}</a></td>
-                                    <td>${item.name}</td>
-                                    <td>
-                                        <a href="user/${item.id}/edit">修改</a>
-                                        <a href="user/${item.id}/password/edit">修改密码</a>
-                                        % if item.username != 'admin':
-                                        <a href="user/${item.id}/groups/edit">设置组</a>
-                                        <a href="user/${item.id}/roles/edit">设置角色</a>
-                                        <a href="user/${item.id}?_method=delete" onclick="return confirm('确定要删除吗?')">删除</a>
-                                        % endif
-                                    </td>
-                                </tr>
-                                % endfor
-                            </tbody>
-                        </table>
+                        <div class="wrap">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="192">用户名</th>
+                                        <th>姓名</th>
+                                        <th width="224">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    % for item in pagination.records:
+                                    <tr>
+                                        <td><a href="user/${item.id}">${item.username}</a></td>
+                                        <td>${item.name}</td>
+                                        <td>
+                                            <a href="user/${item.id}/edit" title="修改"><span class="glyphicon glyphicon-edit"></span></a>
+                                            <a href="user/${item.id}/password/edit">修改密码</a>
+                                            % if item.username != 'admin':
+                                            <a href="user/${item.id}/groups/edit">设置组</a>
+                                            <a href="user/${item.id}/roles/edit">设置角色</a>
+                                            <a href="user/${item.id}?_method=delete" title="删除" class="text-danger" onclick="return confirm('确定要删除吗?');"><span class="glyphicon glyphicon-remove"></span></a>
+                                            % endif
+                                        </td>
+                                    </tr>
+                                    % endfor
+                                </tbody>
+                            </table>
+                        </div>
                         <% action = 'user?keyword=' + (keyword if keyword else '') %>
                         <%namespace name="paginate" file="../include/pagination.html" />
                         ${paginate.show(action, pagination)}
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 <%include file="../include/footer.html" />

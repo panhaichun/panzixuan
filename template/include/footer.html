@@ -1,29 +1,28 @@
         <footer class="page-bottom">
             <div class="container">
                 <div class="row">
-                    <address class="span4 muted">联系我: <a href="mailto:panhaichun@gmail.com">panhaichun@gmail.com</a></address>
-                    <address class="span4 muted">QQ: 285299451</address>
-                    <address class="span4 muted">Github: <a href="https://github.com/panhaichun/panzixuan" target="_blank">项目地址</a></address>
+                    <address class="col-md-4 text-muted">联系我: <a href="mailto:panhaichun@gmail.com">panhaichun@gmail.com</a></address>
+                    <address class="col-md-4 text-muted">QQ: 285299451</address>
+                    <address class="col-md-4 text-muted">Github: <a href="https://github.com/panhaichun/panzixuan" target="_blank">项目地址</a></address>
                 </div>
-                <p class="muted">Copyright &copy; <a href="http://www.panzixuan.com" target="_blank">panzixuan.com</a> 版权所有</p>
+                <p class="text-muted">Copyright &copy; <a href="http://www.panzixuan.com" target="_blank">panzixuan.com</a> 版权所有</p>
             </div>
         </footer>
-        <a class="affix hide" id="back-to-top" href="#"></a>
+        <a class="affix" id="back-to-top" href="#"></a>
     </body>
 </html>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="js/base.js"></script>
-<script type="text/javascript">
-    $(function() {
-        $(window).scroll(function() {
-            if ($(window).scrollTop() > 64) {
-                $("#back-to-top").fadeIn(200);
-            } else {
-                $("#back-to-top").fadeOut(200);
-            }
-        });
-        var ctth = $(window).height() - $("header.navbar-fixed-top").outerHeight(true) - $("footer.page-bottom").outerHeight(true) - 20;
-        $(".page-content").css({ "minHeight": ctth + "px" });
+<script>
+    var _ctH = $(window).height() - $("header.navbar-fixed-top").outerHeight(true) - $("footer.page-bottom").outerHeight(true);
+    $("body > .container").css({ "minHeight": _ctH + "px" });
+    
+    $("#back-to-top").hide();
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 64) {
+            $("#back-to-top").fadeIn(200);
+        } else {
+            $("#back-to-top").fadeOut(200);
+        }
     });
 </script>

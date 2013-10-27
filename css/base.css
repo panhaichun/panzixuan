@@ -11,4 +11,38 @@ table th, table td { white-space: nowrap; overflow: hidden; text-overflow: ellip
 dl dt { font-family: "Microsoft Yahei"; }
 dl dd { margin-bottom: 10px; }
 
-.btn-lg, .navbar-brand { font-family: "Microsoft Yahei"; }
+.btn-lg { font-family: "Microsoft Yahei"; }
+
+body { padding-top: 80px; background: #dfdfdf; }
+
+form.form-search { width: 240px; }
+form .input-group span.btn-primary { color: #ffffff; background: #428bca; border-color: #357ebd; }
+form .input-group span.btn-primary:hover { color: #ffffff; background: #3276b1; border-color: #285e8e; }
+header.navbar-fixed-top { height: 60px; padding-top: 5px; background: #f9f9f9; border-bottom: 1px solid #f9f9f9; box-shadow: 0 0 4px rgba(0,0,0,.25); }
+header.navbar-fixed-top h1 { margin: 0; font-size: 24px; padding-top: 8px; }
+header.navbar-fixed-top h1 a { color: #777777; text-decoration: none; }
+header.navbar-fixed-top h1 a:hover { color: #5e5e5e; text-decoration: none; }
+header.navbar-fixed-top .col-md-5 div { padding-top: 3px; }
+header.navbar-fixed-top form { margin-top: 8px; }
+header.navbar-fixed-top .control-box { top: 13px; }
+.control-box { right: 15px; }
+.control-box  .btn-group { margin-bottom: 33px; }
+.control-box .dropdown-menu { min-width: 128px; }
+
+.content { background: #ffffff; border: 1px solid #ffffff; border-radius: 4px; box-shadow: 0 0 2px rgba(0,0,0,.25); } 
+.content .wrap { margin: 15px; }
+.content article { padding: 0 10px; border: 1px solid #ffffff; border-radius: 4px; box-shadow: 0 0 8px rgba(0,0,0,.25); }
+.content article header { margin-bottom: 10px; border-bottom: 1px solid #eeeeee; }
+.content article footer { padding-top: 10px; border-top: 1px solid #eeeeee;} 
+article header a { color: #333333; }
+article header a:hover { text-decoration: none; }
+
+.panel-menu { border: 0; border-radius: 0; box-shadow: 0 0 0; }
+.panel-menu .panel-heading { padding: 15px 15px 0 15px; }
+.panel-menu .panel-heading h4{ margin: 0; }
+
+#back-to-top { width: 38px; height: 38px; right: 64px; bottom: 64px; z-index: 2147483647; background: url(images/back-to-top.png) no-repeat; }
+footer.page-bottom { margin-top: 20px; padding: 40px 0; background: #f5f5f5; border-top: 1px solid #f5f5f5; box-shadow: 0 0 4px rgba(0,0,0,.25); }
+
+form.login-form  { width: 400px; margin: 0 auto; padding: 15px; background: #ffffff; border-radius: 4px; box-shadow: 0 0 1px rgba(0,0,0,.25); }
+.content-error { padding: 15px; background: #ffffff; border-radius: 4px; box-shadow: 0 0 1px rgba(0,0,0,.25); }}

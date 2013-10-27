@@ -1,13 +1,32 @@
 <%include file="../include/header.html" />
-        <section class="page-content">
-            <div class="container">
-                <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
                     <div class="content">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a>我的个人信息</a></li>
-                            <li><a href="javascript: history.back()">返回</a></li>
+                        <div class="panel panel-menu">
+                            <div class="panel-heading"><h4><span class="glyphicon glyphicon-user"></span> 个人中心</h4></div>
+                        </div>
+                        <div class="list-group wrap">
+                            <a href="javascript:" class="list-group-item active">
+                                <span class="glyphicon glyphicon-folder-open"></span> 个人信息 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                            <a href="profile/password/edit" class="list-group-item">
+                                <span class="glyphicon glyphicon-folder-close"></span> 密码 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                            <a href="profile/log" class="list-group-item">
+                                <span class="glyphicon glyphicon-folder-close"></span> 日志 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="content">
+                        <ul class="nav nav-pills wrap">
+                            <li class="active"><a href="javascript:"><span class="glyphicon glyphicon-expand"></span> 查看</a></li>
+                            <li><a href="profile/edit"><span class="glyphicon glyphicon-edit"></span> 修改</a></li>
+                            <li class="pull-right"><a href="javascript: history.back();"><span class="glyphicon glyphicon-hand-left"></span> 返回</a></li>
                         </ul>
-                        <dl>
+                        <dl class="dl-horizontal wrap">
                             <dt>用户名</dt>
                             <dd>${model.username}</dd>
                             <dt>姓名</dt>
@@ -28,5 +47,5 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 <%include file="../include/footer.html" />
