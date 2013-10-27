@@ -1,6 +1,6 @@
 import logging
 import traceback
-
+import urllib.parse
 import config
 import security.authholder as authholder
 from security.authentication import AuthenticationProvider, AuthenticationException
@@ -50,7 +50,8 @@ def login(request, response):
     # 认证失败统一由异常处理
     response.set_cookie(username_key, username, config.cookie_path, config.cookie_domain)
     response.set_cookie(password_key, password, config.cookie_path, config.cookie_domain)
-    response.redirect(request.get_param(redirect_key, '/'))
+    redirect = request.get_param(redirect_key)
+    response.redirect(redirect if redirect else '/')
 	
 def get_authentication(request):
     cookies = request.get_cookies()
