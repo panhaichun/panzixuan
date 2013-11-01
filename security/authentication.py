@@ -23,6 +23,19 @@ class Authentication:
         
     def get_roles(self):
         return self.__roles
+    
+    def contains_role(self, role_name):
+        if not role_name:
+            return True
+        return role_name in self.get_roles()
+    
+    def with_roles(self, role_names):
+        if not role_names:
+            return True
+        for role_name in role_names:
+            if self.contains_role(role_name):
+                return True
+        return False
         
     def get_principal(self):
         return self.__principal

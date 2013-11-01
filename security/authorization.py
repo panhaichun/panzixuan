@@ -57,16 +57,11 @@ class AuthorizationProvider:
         if resource.is_protected():
             if not auth:
                 raise UnAuthenticationException('资源[%s]不允许匿名访问' % str(resource))
-            if not self.__accessable(auth, set(resource.allow_roles())):
+            if not self.__accessable(auth, resource.allow_roles()):
                 raise UnauthorizedException('用户[%s]没有访问资源[%s]的权限' % (str(auth), str(resource)))
                 
     def __accessable(self, auth, role_names):
-        if not role_names:
-            return True
-        roles = auth.get_roles()
-        if not roles:
-            return False
-        return role_names & roles
+        return auth.with_roles(role_names) if role_names else True
         
 authorization_provider = AuthorizationProvider()
         

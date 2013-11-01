@@ -13,8 +13,8 @@ def merge(template, data, request):
     data = data if data else {}
     if not 'config' in data:
         data['config'] = config
-    if not 'principal' in data:
-        data['principal'] = authholder.principal()
+    if not 'auth' in data:
+        data['auth'] = authholder.get()
     return template.render(**data)
 
 def render(template, data, request, response):

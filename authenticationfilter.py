@@ -46,7 +46,10 @@ def login(request, response):
     username = request.get_param(username_key)
     password = request.get_param(password_key)
     logging.info('用户[%s]请求系统认证' % username);
-    authentication_provider.authenticate(username, password)
+    try:
+        authentication_provider.authenticate(username, password)
+    except Exception as e:
+        raise e
     # 认证失败统一由异常处理
     response.set_cookie(username_key, username, config.cookie_path, config.cookie_domain)
     response.set_cookie(password_key, password, config.cookie_path, config.cookie_domain)
@@ -69,7 +72,10 @@ def get_authentication(request):
 
 def logout(authentication, request, response):
     logging.info('用户[%s]请求注销' % str(authentication))
-    authentication_provider.logout(authentication)
+    try:
+        authentication_provider.logout(authentication)
+    except Exception as e:
+        raise e
     response.set_cookie(username_key, '', config.cookie_path, config.cookie_domain)
     response.set_cookie(password_key, '', config.cookie_path, config.cookie_domain)
     response.redirect(request.get_header(referer_key, '/'))

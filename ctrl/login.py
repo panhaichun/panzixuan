@@ -7,4 +7,3 @@ def get(request, response):
         {'message': request.get_param('message'), 'redirect': request.get_param('redirect', request.get_header('referer', ''))}, 
         request, 
         response)
-    

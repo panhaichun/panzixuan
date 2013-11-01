@@ -2,8 +2,8 @@
 <html lang="zh_CN">
     <head>
         <meta charset="${config.encoding}" />
-        % if subtitle:
-        <title>${config.site_name} - ${subtitle}</title>
+        % if title:
+        <title>${config.site_name} - ${title}</title>
         % else:
         <title>${config.site_name}</title>
         % endif
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <form class="pull-right" action="search" method="get">
+                        <form action="search" method="get">
                             <div class="input-group">
                                 <input type="text" name="keyword" value="${top_keyword if top_keyword else ''}" class="form-control" placeholder="我想找..." />
                                 <span class="input-group-addon btn btn-primary" onclick="$(this).parents('form').submit();">
@@ -48,29 +48,35 @@
                     </div>
                 </div>
             </div>
-            % if principal:
+            % if auth:
             <div class="control-box affix">
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a href="profile"><span class="glyphicon glyphicon-expand"></span> ${principal.get_prototype().name}</a></li>
+                      <li><a href="profile"><span class="glyphicon glyphicon-expand"></span> ${auth.get_principal().get_prototype().name}</a></li>
                       <li class="divider"></li>
                       <li><a href="logout" onclick="return confirm('确定要退出吗?');"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
                     </ul>
                 </div>
-                % if principal.get_prototype().contains_role('MANAGEMENT'):
+                % if auth.with_roles(['SYS_USER', 'SYS_LOG', 'BLOG_MGR', 'ALBUM_MGR']):
                 <div class="clearfix"></div>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
+                        % if auth.with_roles(['BLOG_MGR']):
                         <li><a href="blog/add"><span class="glyphicon glyphicon-edit"></span> 日志</a></li>
+                        % endif
+                        % if auth.with_roles(['ALBUM_MGR']):
                         <li><a href="album/add"><span class="glyphicon glyphicon-edit"></span> 相片</a></li>
+                        % endif
+                        % if auth.with_roles(['SYS_USER', 'SYS_LOG']):
                         <li class="divider"></li>
                         <li><a href="user"><span class="glyphicon glyphicon-wrench"></span> 系统</a></li>
+                        % endif
                     </ul>
                 </div>
                 % endif

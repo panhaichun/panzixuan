@@ -1,4 +1,4 @@
-import pzx.user as user
+import pzx.user
 from security.authentication import AccountNotFoundException
 
 class Account:
@@ -37,6 +37,6 @@ class Account:
 
 def find_account(name):
     try:
-        return Account(user.get_by_username(name))
-    except user.UserNotFoundException:
+        return Account(pzx.user.get_by_username(name))
+    except pzx.user.UserNotFoundException:
         raise AccountNotFoundException('账号[%s]不存在' % name)

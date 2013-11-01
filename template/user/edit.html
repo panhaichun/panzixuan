@@ -32,6 +32,7 @@
                             <li class="pull-right"><a href="javascript: history.back();"><span class="glyphicon glyphicon-hand-left"></span> 返回</a></li>
                         </ul>
                         <form action="user/${model.id}" method="post" class="wrap" style="width: 320px;">
+                            <input type="hidden" name="_method" value="put" />
                             <div class="form-group">
                                 <label for="username">用户名</label>
                                 <input type="text" id="username" value="${model.username}" class="form-control" disabled="disabled" />
