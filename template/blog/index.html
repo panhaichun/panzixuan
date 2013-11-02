@@ -3,6 +3,8 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="content">
+                        % if articles:
+                        % for article in articles:
                         <article class="wrap">
                             <header><h3><a href="blog/${article.id}">${article.title}</a></h3></header>
                             <p>${article.content}</p>
@@ -16,34 +18,8 @@
                                 </ul>
                             </footer>
                         </article>
-                        
-                        <article class="wrap">
-                            <header><h3><a href="blog/${article.id}">${article.title}</a></h3></header>
-                            <p>${article.content}</p>
-                            <footer>
-                                <ul class="list-inline">
-                                    <time pubdate="pubdate">${article.publishTime}</time>
-                                    <li><em>${article.authorName}</em></li>
-                                    <li><a href="">${article.keywords}</a></li>
-                                    <li><a href="">评论(${article.commentsTimes})</a></li>
-                                    <li><a href="">阅读(${article.readTimes})</a></li>
-                                </ul>
-                            </footer>
-                        </article>
-                        
-                        <article class="wrap">
-                            <header><h3><a href="blog/${article.id}">${article.title}</a></h3></header>
-                            <p>${article.content}</p>
-                            <footer>
-                                <ul class="list-inline">
-                                    <time pubdate="pubdate">${article.publishTime}</time>
-                                    <li><em>${article.authorName}</em></li>
-                                    <li><a href="">${article.keywords}</a></li>
-                                    <li><a href="">评论(${article.commentsTimes})</a></li>
-                                    <li><a href="">阅读(${article.readTimes})</a></li>
-                                </ul>
-                            </footer>
-                        </article>
+                        % endfor
+                        % endif
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -51,30 +27,33 @@
                         <div class="wrap">
                             <h3>标签</h3>
                             <p>
+                                % if labels:
+                                % for label in labels:
                                 <a href="#">${label.name}</a>
-                                <a href="#">${label.name}</a>
-                                <a href="#">${label.name}</a>
-                                <a href="#">${label.name}</a>
+                                % endfor
+                                % endif
                             </p>
                         </div>
                         <hr>
                         <div class="wrap">
                             <h3>分类</h3>
                             <ul class="list-unstyled">
+                                % if categories:
+                                % for category in categories:
                                 <li><a href="#">${category.name}</a></li>
-                                <li><a href="#">${category.name}</a></li>
-                                <li><a href="#">${category.name}</a></li>
-                                <li><a href="#">${category.name}</a></li>
+                                % endfor
+                                % endif
                             </ul>
                         </div>
                         <hr>
                         <div class="wrap">
                             <h3>归档</h3>
                             <ul class="list-unstyled">
+                                % if archives:
+                                % for archive in archives:
                                 <li><a href="#">${archive.month}</a></li>
-                                <li><a href="#">${archive.month}</a></li>
-                                <li><a href="#">${archive.month}</a></li>
-                                <li><a href="#">${archive.month}</a></li>
+                                % endfor
+                                % endif
                             </ul>
                         </div>
                     </aside>
