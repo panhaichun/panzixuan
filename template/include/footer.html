@@ -8,7 +8,7 @@
                 <p class="text-muted">Copyright &copy; <a href="http://www.panzixuan.com" target="_blank">panzixuan.com</a> 版权所有</p>
             </div>
         </footer>
-        <a class="affix" id="back-to-top" href="#"></a>
+        <a class="affix" id="back-to-top" href="javascript:"></a>
     </body>
 </html>
 <script src="js/jquery.js"></script>
@@ -17,6 +17,7 @@
     var _ctH = $(window).height() - $("header.navbar-fixed-top").outerHeight(true) - $("footer.page-bottom").outerHeight(true);
     $("body > .container").css({ "minHeight": _ctH + "px" });
     
+    $("#back-to-top").click(function() { $("body").scrollTop(0); });
     $("#back-to-top").hide();
     $(window).scroll(function() {
         if ($(window).scrollTop() > 64) {
