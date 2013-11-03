@@ -13,13 +13,13 @@ def dispatch(request):
 
 @authorization.protected(name='查看自己信息', allow_roles=('USER',))
 def get(request, response):
-    data = {'title': '个人中心 - 查看'}
+    data = {'title': authholder.principal().get_prototype().name + ' - 个人信息 - 查看'}
     data['model'] = pzx.user.get_self(authholder.principal().get_prototype().id)
     webutil.render('/profile/view.html', data, request, response)
 
 @authorization.protected(name='修改自己信息', allow_roles=('USER',))
 def edit(request, response):
-    data = {'title': '个人中心 - 修改'}
+    data = {'title': authholder.principal().get_prototype().name + ' - 个人信息 - 修改'}
     data['model'] = pzx.user.get(authholder.principal().get_prototype().id)
     webutil.render('/profile/edit.html', data, request, response)
 
@@ -30,7 +30,7 @@ def put(request, response):
 
 @authorization.protected(name='修改自己密码', allow_roles=('USER',))
 def edit_password(request, response):
-    data = {'title': '个人中心 - 修改密码'}
+    data = {'title': authholder.principal().get_prototype().name + ' - 密码 - 修改'}
     data['model'] = pzx.user.get_self(authholder.principal().get_prototype().id)
     webutil.render('/profile/password_edit.html', data, request, response)
 

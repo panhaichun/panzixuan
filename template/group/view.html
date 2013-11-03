@@ -23,7 +23,9 @@
                             <li class="active"><a href="javascript:"><span class="glyphicon glyphicon-expand"></span> 查看</a></li>
                             <li><a href="group/${model.id}/edit"><span class="glyphicon glyphicon-edit"></span> 修改</a></li>
                             <li><a href="group/add?parent_id=${model.id}"><span class="glyphicon glyphicon-plus"></span> 创建子组</a></li>
+                            % if model.name != '管理员':
                             <li><a href="group/${model.id}/roles/edit"><span class="glyphicon glyphicon-wrench"></span> 设置角色</a></li>
+                            % endif
                             <li><a href="group"><span class="glyphicon glyphicon-list"></span> 列表</a></li>
                             <li><a href="group/add"><span class="glyphicon glyphicon-plus"></span> 创建</a></li>
                             <li class="pull-right"><a href="javascript: history.back();"><span class="glyphicon glyphicon-hand-left"></span> 返回</a></li>

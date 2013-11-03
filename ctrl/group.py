@@ -14,7 +14,7 @@ def dispatch(request):
 
 @authorization.protected(name='创建组', allow_roles=('SYS_USER',))
 def add(request, response):
-    data = {'title': '组 - 创建', 'parent_id': request.get_param('parent_id')}
+    data = {'title': '系统管理 - 组 - 创建', 'parent_id': request.get_param('parent_id')}
     webutil.render('/group/add.html', data, request, response)
 
 @authorization.protected(name='创建组', allow_roles=('SYS_USER',))
@@ -25,7 +25,7 @@ def post(request, response):
 
 @authorization.protected(name='组列表', allow_roles=('SYS_USER',))
 def list(request, response):
-    data = {'title': '组 - 列表'}
+    data = {'title': '系统管理 - 组 - 列表'}
     page = request.get_param('page')
     size = request.get_param('size')
     keyword = request.get_param('keyword')
@@ -35,14 +35,14 @@ def list(request, response):
 
 @authorization.protected(name='查看组', allow_roles=('SYS_USER',))
 def get(request, response):
-    data = {'title': '组 - 查看'}
+    data = {'title': '系统管理 - 组 - 查看'}
     id = re.search('\d+', request.get_path()).group(0)
     data['model'] = pzx.group.get(int(id))
     webutil.render('/group/view.html', data, request, response)
     
 @authorization.protected(name='修改组', allow_roles=('SYS_USER',))
 def edit(request, response):
-    data = {'title': '组 - 修改'}
+    data = {'title': '系统管理 - 组 - 修改'}
     id = re.search('\d+', request.get_path()).group(0)
     data['model'] = pzx.group.get(int(id))
     webutil.render('/group/edit.html', data, request, response)
@@ -61,7 +61,7 @@ def delete(request, response):
 
 @authorization.protected(name='设置组角色', allow_roles=('SYS_USER',))
 def edit_roles(request, response):
-    data = {'title': '组 - 设置角色'}
+    data = {'title': '系统管理 - 组 - 设置角色'}
     id = re.search('\d+', request.get_path()).group(0)
     data['model'] = pzx.group.get(int(id))
     data['roles'] = pzx.role.list()
