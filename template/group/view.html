@@ -3,12 +3,12 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="content">
-                        <h4 class="wrap"><span class="glyphicon glyphicon-cog"></span> 系统管理</h4>
-                        <div class="list-group wrap">
+                        <h4 class="mtb20"><span class="glyphicon glyphicon-cog"></span> 系统管理</h4>
+                        <div class="list-group">
                             <a href="user" class="list-group-item">
                                 <span class="glyphicon glyphicon-folder-close"></span> 用户 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
                             </a>
-                            <a href="javascript:" class="list-group-item active">
+                            <a href="group" class="list-group-item active">
                                 <span class="glyphicon glyphicon-folder-open"></span> 组 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
                             </a>
                             <a href="log" class="list-group-item">
@@ -19,23 +19,24 @@
                 </div>
                 <div class="col-md-9">
                     <div class="content">
-                        <ul class="nav nav-pills wrap">
+                        <ul class="nav nav-pills mtb20">
                             <li class="active"><a href="javascript:"><span class="glyphicon glyphicon-expand"></span> 查看</a></li>
                             <li><a href="group/${model.id}/edit"><span class="glyphicon glyphicon-edit"></span> 修改</a></li>
                             <li><a href="group/add?parent_id=${model.id}"><span class="glyphicon glyphicon-plus"></span> 创建子组</a></li>
                             % if model.name != '管理员':
                             <li><a href="group/${model.id}/roles/edit"><span class="glyphicon glyphicon-wrench"></span> 设置角色</a></li>
                             % endif
-                            <li><a href="group"><span class="glyphicon glyphicon-list"></span> 列表</a></li>
-                            <li><a href="group/add"><span class="glyphicon glyphicon-plus"></span> 创建</a></li>
+                            % if model.name not in ('用户', '管理员'):
+                            <li><a href="group/${model.id}?_method=delete" class="text-danger" onclick="return confirm('确定要删除吗?');"><span class="glyphicon glyphicon-remove"></span> 删除</a></li>
+                            % endif
                             <li class="pull-right"><a href="javascript: history.back();"><span class="glyphicon glyphicon-hand-left"></span> 返回</a></li>
                         </ul>
-                        <dl class="dl-horizontal wrap">
+                        <dl class="dl-horizontal">
                             <dt>名称</dt>
                             <dd>${model.name}</dd>
                             <dt>描述</dt>
                             <dd>${model.description}</dd>
-                            <dt>拥有角色</dt>
+                            <dt>包含角色</dt>
                             <dd>
                                 % for r in model.get_contain_roles():
                                 ${r.name} [${r.description}]<br />

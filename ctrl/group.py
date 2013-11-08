@@ -20,8 +20,8 @@ def add(request, response):
 @authorization.protected(name='创建组', allow_roles=('SYS_USER',))
 def post(request, response):
     parent_id = request.get_param('parent_id')
-    pzx.group.create(request.get_param('name'), request.get_param('description'), int(parent_id) if parent_id else None)
-    response.redirect('group')
+    group = pzx.group.create(request.get_param('name'), request.get_param('description'), int(parent_id) if parent_id else None)
+    response.redirect('group/' + str(group.id))
 
 @authorization.protected(name='组列表', allow_roles=('SYS_USER',))
 def list(request, response):
@@ -51,7 +51,7 @@ def edit(request, response):
 def put(request, response):
     id = re.search('\d+', request.get_path()).group(0)
     pzx.group.update(int(id), request.get_param('name'), request.get_param('description'))
-    response.redirect('../group')
+    response.redirect('../group/' + id)
     
 @authorization.protected(name='删除组', allow_roles=('SYS_USER',))
 def delete(request, response):
@@ -72,7 +72,7 @@ def put_roles(request, response):
     id = re.search('\d+', request.get_path()).group(0)
     role_ids = request.get_params('role_id')
     pzx.group.set_roles(int(id), [int(role_id) for role_id in role_ids] if role_ids else [])
-    response.redirect('../../group')
+    response.redirect('../../group/' + id)
     
 mapping = {}
 mapping['/group/add#get'] = add

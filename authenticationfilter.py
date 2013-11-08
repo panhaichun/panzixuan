@@ -54,7 +54,8 @@ def login(request, response):
     response.set_cookie(username_key, username, config.cookie_path, config.cookie_domain)
     response.set_cookie(password_key, password, config.cookie_path, config.cookie_domain)
     redirect = request.get_param(redirect_key)
-    response.redirect(redirect if redirect else '/')
+    if redirect:
+        response.redirect(redirect)
 	
 def get_authentication(request):
     cookies = request.get_cookies()
@@ -78,7 +79,9 @@ def logout(authentication, request, response):
         raise e
     response.set_cookie(username_key, '', config.cookie_path, config.cookie_domain)
     response.set_cookie(password_key, '', config.cookie_path, config.cookie_domain)
-    response.redirect(request.get_header(referer_key, '/'))
+    redirect = request.get_header(referer_key)
+    if redirect:
+        response.redirect(redirect)
 
 def require_to_logout(request):
     return request.get_path().startswith(logout_uri)

@@ -19,8 +19,8 @@ def add(request, response):
 
 @authorization.protected(name='创建用户', allow_roles=('SYS_USER',))
 def post(request, response):
-    pzx.user.create(request.get_param('username'), request.get_param('password'), request.get_param('name'))
-    response.redirect('user')
+    user = pzx.user.create(request.get_param('username'), request.get_param('password'), request.get_param('name'))
+    response.redirect('user/' + str(user.id))
 
 @authorization.protected(name='用户列表', allow_roles=('SYS_USER',))
 def list(request, response):
@@ -50,7 +50,7 @@ def edit(request, response):
 def put(request, response):
     id = re.search('\d+', request.get_path()).group(0)
     pzx.user.update(int(id), request.get_param('name'))
-    response.redirect('../user')
+    response.redirect('../user/' + id)
     
 @authorization.protected(name='删除用户', allow_roles=('SYS_USER',))
 def delete(request, response):
@@ -69,7 +69,7 @@ def edit_password(request, response):
 def put_password(request, response):
     id = re.search('\d+', request.get_path()).group(0)
     pzx.user.update_password(int(id), request.get_param('password'))
-    response.redirect('../../user')
+    response.redirect('../../user/' + id)
 
 @authorization.protected(name='设置用户组', allow_roles=('SYS_USER',))
 def edit_groups(request, response):
@@ -84,7 +84,7 @@ def put_groups(request, response):
     id = re.search('\d+', request.get_path()).group(0)
     group_ids = request.get_params('group_id')
     pzx.user.set_groups(int(id), [int(group_id) for group_id in group_ids] if group_ids else [])
-    response.redirect('../../user')
+    response.redirect('../../user/' + id)
 
 @authorization.protected(name='设置用户角色', allow_roles=('SYS_USER',))
 def edit_roles(request, response):
@@ -99,7 +99,7 @@ def put_roles(request, response):
     id = re.search('\d+', request.get_path()).group(0)
     role_ids = request.get_params('role_id')
     pzx.user.set_roles(int(id), [int(role_id) for role_id in role_ids] if role_ids else [])
-    response.redirect('../../user')
+    response.redirect('../../user/' + id)
     
 mapping = {}
 mapping['/user/add#get'] = add

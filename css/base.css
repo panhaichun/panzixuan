@@ -16,6 +16,10 @@ dl.dl-horizontal dd { margin-left: 148px; }
 .btn-lg { font-family: "Microsoft Yahei"; }
 .glyphicon { line-height: .9em; }
 
+.mt20 { margin-top: 20px; }
+.mb20 { margin-bottom: 20px; }
+.mtb20 { margin-top: 20px; margin-bottom: 20px; }
+
 body { padding-top: 80px; background: #dfdfdf; }
 
 form.form-search { width: 240px; }
@@ -32,8 +36,7 @@ header.navbar-fixed-top .control-box { top: 13px; }
 .control-box  .btn-group { margin-bottom: 33px; }
 ul.dropdown-menu { min-width: 128px; }
 
-.content { background: #ffffff; border: 1px solid #ffffff; border-radius: 4px; box-shadow: 0 0 1px rgba(0,0,0,.25); }
-.content .wrap { margin: 20px 0; }
+.content { padding: 0 15px; background: #ffffff; border: 1px solid #ffffff; border-radius: 4px; box-shadow: 0 0 1px rgba(0,0,0,.25); }
 .content article { padding: 0 10px; border: 1px solid #ffffff; border-radius: 4px; box-shadow: 0 0 16px rgba(0,0,0,.25); }
 .content article header { margin-bottom: 10px; border-bottom: 1px solid #eeeeee; }
 .content article footer { padding-top: 10px; border-top: 1px solid #eeeeee;} 

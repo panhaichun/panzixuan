@@ -4,9 +4,9 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="content">
-                        <h4 class="wrap"><span class="glyphicon glyphicon-cog"></span> 系统管理</h4>
-                        <div class="list-group wrap">
-                            <a href="javascript:" class="list-group-item active">
+                        <h4 class="mtb20"><span class="glyphicon glyphicon-cog"></span> 系统管理</h4>
+                        <div class="list-group">
+                            <a href="user" class="list-group-item active">
                                 <span class="glyphicon glyphicon-folder-open"></span> 用户 <span class="glyphicon glyphicon-chevron-right pull-right"></span>
                             </a>
                             <a href="group" class="list-group-item">
@@ -20,24 +20,25 @@
                 </div>
                 <div class="col-md-9">
                     <div class="content">
-                        <ul class="nav nav-pills wrap">
+                        <ul class="nav nav-pills mtb20">
                             <li class="active"><a href="javascript:"><span class="glyphicon glyphicon-plus"></span> 创建</a></li>
-                            <li><a href="user"><span class="glyphicon glyphicon-list"></span> 列表</a></li>
                             <li class="pull-right"><a href="javascript: history.back();"><span class="glyphicon glyphicon-hand-left"></span> 返回</a></li>
                         </ul>
-                        <form action="user" method="post" class="wrap" style="width: 320px;">
-                            <div class="form-group">
-                                <label for="username"><font color="#ff0000">*</font>用户名</label>
-                                <input type="text" id="username" name="username" class="form-control" required="required" maxlength="16" />
-                            </div>
-                            <div class="form-group">
-                                <label for="password">密码</label>
-                                <input type="password" id="password" name="password" class="form-control" maxlength="16" />
-                            </div>
-                            <div class="form-group">
-                                <label for="name"><font color="#ff0000">*</font>姓名</label>
-                                <input type="text" id="name" name="name" class="form-control" required="required" maxlength="32" />
-                            </div>
+                        <form action="user" method="post" class="mb20">
+                            <fieldset class="mb20" style="width: 320px;">
+                                <div class="form-group">
+                                    <label for="username"><font color="#ff0000">*</font>用户名</label>
+                                    <input type="text" id="username" name="username" class="form-control" required="required" maxlength="16" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">密码</label>
+                                    <input type="password" id="password" name="password" class="form-control" maxlength="16" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="name"><font color="#ff0000">*</font>姓名</label>
+                                    <input type="text" id="name" name="name" class="form-control" required="required" maxlength="32" />
+                                </div>
+                            </fieldset>
                             <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> 提交</button>
                         </form>
                     </div>
